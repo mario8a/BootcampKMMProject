@@ -1,0 +1,12 @@
+<resources>
+    <string name="welcome">Bienvenidos</string>
+    <string-array name="week_days">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+        <item>Domingo</item>
+    </string-array>
+</resources>
