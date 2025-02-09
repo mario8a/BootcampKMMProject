@@ -9,12 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
-import bootcampkmmproject.composeapp.generated.resources.Montserrat_Bold
-import bootcampkmmproject.composeapp.generated.resources.Montserrat_Regular
+import bootcampkmmproject.composeapp.generated.resources.Overlock_Bold
+import bootcampkmmproject.composeapp.generated.resources.Overlock_Regular
 import bootcampkmmproject.composeapp.generated.resources.Res
+import org.jetbrains.compose.resources.Font
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -264,8 +264,73 @@ fun AppTheme(
 ) {
     val colorScheme = if (darkTheme) darkScheme else lightScheme
 
+    val typography = Typography(
+        displayLarge = TextStyle(
+            fontSize = 57.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Bold))
+        ),
+        displayMedium = TextStyle(
+            fontSize = 45.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Bold))
+        ),
+        displaySmall = TextStyle(
+            fontSize = 36.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Bold))
+        ),
+        headlineLarge = TextStyle(
+            fontSize = 32.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Bold))
+        ),
+        headlineMedium = TextStyle(
+            fontSize = 28.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Bold))
+        ),
+        headlineSmall = TextStyle(
+            fontSize = 24.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Bold))
+        ),
+        titleLarge = TextStyle(
+            fontSize = 22.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Regular))
+        ),
+        titleMedium = TextStyle(
+            fontSize = 16.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Regular))
+        ),
+        titleSmall = TextStyle(
+            fontSize = 14.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Regular))
+        ),
+        bodyLarge = TextStyle(
+            fontSize = 16.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Regular))
+        ),
+        bodyMedium = TextStyle(
+            fontSize = 14.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Regular))
+        ),
+        bodySmall = TextStyle(
+            fontSize = 12.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Regular))
+        ),
+        labelLarge = TextStyle(
+            fontSize = 14.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Regular))
+        ),
+        labelMedium = TextStyle(
+            fontSize = 12.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Regular))
+        ),
+        labelSmall = TextStyle(
+            fontSize = 11.sp,
+            fontFamily = FontFamily(Font(Res.font.Overlock_Regular))
+        )
+    )
+
+
     MaterialTheme(
         colorScheme = colorScheme,
+        typography = typography,
         content = content
     )
 }

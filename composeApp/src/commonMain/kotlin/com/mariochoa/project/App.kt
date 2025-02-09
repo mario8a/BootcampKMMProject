@@ -6,12 +6,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,10 +19,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import bootcampkmmproject.composeapp.generated.resources.Res
 import bootcampkmmproject.composeapp.generated.resources.compose_multiplatform
+import bootcampkmmproject.composeapp.generated.resources.fletelogo
 import bootcampkmmproject.composeapp.generated.resources.week_days
+import bootcampkmmproject.composeapp.generated.resources.welcome
+import coil3.compose.AsyncImage
 import com.mariochoa.theme.AppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringArrayResource
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -39,7 +41,7 @@ fun App() {
                 modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
             ) {
                 Text(
-                    text = "Hello, World!",
+                    text = stringResource(Res.string.welcome),
                     style = MaterialTheme.typography.displayLarge
                 )
                 Text(
@@ -50,17 +52,22 @@ fun App() {
                 stringArrayResource(Res.array.week_days).forEach {
                     Text(
                         text = it,
-                        style = MaterialTheme.typography.bodyMedium
+                        style = MaterialTheme.typography.displayMedium
                     )
                 }
                 Image(
-                    painterResource(Res.drawable.compose_multiplatform),
-                    contentDescription = "Compose Multiplatform"
+                    painterResource(Res.drawable.fletelogo),
+                    contentDescription = "Logo flete"
+                )
+
+                AsyncImage(
+                    model = "https://kotlinlang.org/docs/images/kotlin-logo.png",
+                    contentDescription = "Logo flete"
                 )
                 // recomposicion -> recrear el objeto
-                var email by rememberSaveable{ mutableStateOf("") }
-                var password by rememberSaveable{ mutableStateOf("") }
-                var showDialog by rememberSaveable{ mutableStateOf(false) }
+                var email by rememberSaveable { mutableStateOf("") }
+                var password by rememberSaveable { mutableStateOf("") }
+                var showDialog by rememberSaveable { mutableStateOf(false) }
 
                 TextField(
                     modifier = Modifier.fillMaxWidth(),
