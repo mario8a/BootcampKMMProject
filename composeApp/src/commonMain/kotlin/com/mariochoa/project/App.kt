@@ -4,6 +4,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.Navigator
 import com.mariochoa.presentation.goal.AddGoalScreen
+import com.mariochoa.presentation.goal.GoalViewModel
+import com.mariochoa.presentation.home.Home
 import com.mariochoa.presentation.home.HomeScreen
 import com.mariochoa.theme.AppTheme
 import com.mariochoa.views.AddHabitView
@@ -16,7 +18,11 @@ fun App() {
     AppTheme {
 //        AddHabitView()
 //        AddGoalScreen()
-        Navigator(AddGoalScreen())
+
+        val goalViewModel = GoalViewModel()
+
+//        Navigator(AddGoalScreen())
+        Navigator(HomeScreen(goalViewModel))
 
 //        Surface(
 //            Modifier.fillMaxSize(),

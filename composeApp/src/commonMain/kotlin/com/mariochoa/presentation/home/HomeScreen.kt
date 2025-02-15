@@ -18,6 +18,8 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -32,23 +34,24 @@ import com.mariochoa.presentation.AppScreen
 import com.mariochoa.presentation.composables.core.ChipGroup
 import com.mariochoa.presentation.composables.goal.Goal
 import com.mariochoa.presentation.goal.AddGoalScreen
+import com.mariochoa.presentation.goal.GoalViewModel
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
-class HomeScreen: AppScreen() {
+class HomeScreen(private val viewModel: GoalViewModel) : AppScreen() {
 
     override val contentComposable: @Composable () -> Unit
-        get() = { Home() }
+        get() = { Home(viewModel) }
 }
 
 @Composable
-fun Home() {
+fun Home(viewModel: GoalViewModel) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
 
 
-        // val homeState by viewModel.uiState.collectAsState()
+        val homeState by viewModel.uiState.collectAsState()
 
         Column(
             verticalArrangement = Arrangement.spacedBy(18.dp)
@@ -79,7 +82,6 @@ fun Home() {
             LazyColumn {
                 items(3) {
                     Goal(
-//                    Icons.Default.LocalDrink,
                         Icons.Default.Star,
                         "Drink watter",
                         "Beber agua es bueno para la salud"
@@ -98,7 +100,7 @@ fun Home() {
         val navigator = LocalNavigator.current
         FloatingActionButton(
             onClick = {
-                navigator?.push(AddGoalScreen())
+                navigator?.push(AddGoalScreen(viewModel))
             },
             modifier = Modifier.align(Alignment.BottomEnd)
         ) {

@@ -35,13 +35,15 @@ import bootcampkmmproject.composeapp.generated.resources.pick_icon
 import bootcampkmmproject.composeapp.generated.resources.save_goal
 import bootcampkmmproject.composeapp.generated.resources.title
 import bootcampkmmproject.composeapp.generated.resources.week_days
+import com.mariochoa.domain.goal.Goal
 import com.mariochoa.presentation.AppScreen
 import com.mariochoa.presentation.composables.core.ChipGroup
 import com.mariochoa.presentation.composables.core.ChipGroupMultiselect
+import com.mariochoa.presentation.composables.goal.Goal
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
-class AddGoalScreen : AppScreen() {
+class AddGoalScreen(private val viewModel: GoalViewModel) : AppScreen() {
     //    @Composable
 //    override fun Content() {
 //        AddGoal()
@@ -55,11 +57,11 @@ class AddGoalScreen : AppScreen() {
         }
 
     override val contentComposable: @Composable () -> Unit
-        get() = { AddGoal() }
+        get() = { AddGoal(viewModel) }
 }
 
 @Composable
-fun AddGoal() {
+fun AddGoal(viewModel: GoalViewModel) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.fillMaxSize().padding(vertical = 60.dp),
@@ -125,7 +127,10 @@ fun AddGoal() {
         Button(
             modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter)
                 .padding(PaddingValues(0.dp, 0.dp, 0.dp, 16.dp)),
-            onClick = {},
+            onClick = {
+                // Guardar en el viewModel
+                // viewModel.onEvent(UIEvent.SaveGoal(goal = Goal(1, title, description)))
+            },
         ) {
             Text(stringResource(Res.string.save_goal))
         }
