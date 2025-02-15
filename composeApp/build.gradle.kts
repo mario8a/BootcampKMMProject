@@ -85,6 +85,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.places)
     debugImplementation(compose.uiTooling)
 }
 
