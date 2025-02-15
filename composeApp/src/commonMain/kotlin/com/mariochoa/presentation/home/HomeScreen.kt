@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 //import androidx.compose.material.icons.filled.Bedtime
@@ -25,17 +26,30 @@ import bootcampkmmproject.composeapp.generated.resources.Res
 import bootcampkmmproject.composeapp.generated.resources.months
 import bootcampkmmproject.composeapp.generated.resources.today_goals
 import bootcampkmmproject.composeapp.generated.resources.welcome
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import com.mariochoa.presentation.AppScreen
 import com.mariochoa.presentation.composables.core.ChipGroup
 import com.mariochoa.presentation.composables.goal.Goal
+import com.mariochoa.presentation.goal.AddGoalScreen
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
+class HomeScreen: AppScreen() {
+
+    override val contentComposable: @Composable () -> Unit
+        get() = { Home() }
+}
 
 @Composable
-fun HomeScreen() {
+fun Home() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
+
+
+        // val homeState by viewModel.uiState.collectAsState()
+
         Column(
             verticalArrangement = Arrangement.spacedBy(18.dp)
         ) {
@@ -62,43 +76,30 @@ fun HomeScreen() {
                 )
             }
 
-            Column {
-                Goal(
+            LazyColumn {
+                items(3) {
+                    Goal(
 //                    Icons.Default.LocalDrink,
-                    Icons.Default.Star,
-                    "Drink watter",
-                    "Beber agua es bueno para la salud"
-                )
-                Goal(
-//                    Icons.Filled.LightMode,
-                    Icons.Default.Star,
-                    "Despertar temprano",
-                    "Beber agua es bueno para la salud"
-                )
-                Goal(
-//                    Icons.Default.FitnessCenter,
-                    Icons.Default.Star,
-                    "Ejercitarse",
-                    "Beber agua es bueno para la salud"
-                )
-                Goal(
-//                    Icons.Default.Bedtime,
-                    Icons.Default.Star,
-                    "Dormir temprano",
-                    "Beber agua es bueno para la salud",
-                )
-                Goal(
-//                    Icons.Default.ImportContacts,
-                    Icons.Default.Star,
-                    "Leer",
-                    "Beber agua es bueno para la salud",
-                )
+                        Icons.Default.Star,
+                        "Drink watter",
+                        "Beber agua es bueno para la salud"
+                    )
+                }
+//                Goal(
+////                    Icons.Filled.LightMode,
+//                    Icons.Default.Star,
+//                    "Despertar temprano",
+//                    "Beber agua es bueno para la salud"
+//                )
             }
 
         }
 
+        val navigator = LocalNavigator.current
         FloatingActionButton(
-            onClick = { },
+            onClick = {
+                navigator?.push(AddGoalScreen())
+            },
             modifier = Modifier.align(Alignment.BottomEnd)
         ) {
             Image(

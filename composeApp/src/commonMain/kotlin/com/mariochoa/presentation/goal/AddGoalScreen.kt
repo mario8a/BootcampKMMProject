@@ -1,5 +1,10 @@
 package com.mariochoa.presentation.goal
 
+//import androidx.compose.material.icons.filled.Bedtime
+//import androidx.compose.material.icons.filled.FitnessCenter
+//import androidx.compose.material.icons.filled.ImportContacts
+//import androidx.compose.material.icons.filled.LightMode
+//import androidx.compose.material.icons.filled.LocalDrink
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,11 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
-//import androidx.compose.material.icons.filled.Bedtime
-//import androidx.compose.material.icons.filled.FitnessCenter
-//import androidx.compose.material.icons.filled.ImportContacts
-//import androidx.compose.material.icons.filled.LightMode
-//import androidx.compose.material.icons.filled.LocalDrink
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -35,28 +35,46 @@ import bootcampkmmproject.composeapp.generated.resources.pick_icon
 import bootcampkmmproject.composeapp.generated.resources.save_goal
 import bootcampkmmproject.composeapp.generated.resources.title
 import bootcampkmmproject.composeapp.generated.resources.week_days
+import com.mariochoa.presentation.AppScreen
 import com.mariochoa.presentation.composables.core.ChipGroup
 import com.mariochoa.presentation.composables.core.ChipGroupMultiselect
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
-@Composable
-fun AddGoalScreen() {
-    Box(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
+class AddGoalScreen : AppScreen() {
+    //    @Composable
+//    override fun Content() {
+//        AddGoal()
+//    }
+    override val topBarTitle: (@Composable () -> Unit)?
+        get() = {
             Text(
                 stringResource(Res.string.new_goal),
                 style = MaterialTheme.typography.displaySmall
             )
+        }
+
+    override val contentComposable: @Composable () -> Unit
+        get() = { AddGoal() }
+}
+
+@Composable
+fun AddGoal() {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier.fillMaxSize().padding(vertical = 60.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+//            Text(
+//                stringResource(Res.string.new_goal),
+//                style = MaterialTheme.typography.displaySmall
+//            )
 
             var title by rememberSaveable { mutableStateOf("") }
             TextField(
                 modifier = Modifier.fillMaxWidth(),
                 label = {
-                    Text(stringResource(Res.string.title),)
+                    Text(stringResource(Res.string.title))
                 },
                 value = title,
                 onValueChange = {
@@ -70,7 +88,7 @@ fun AddGoalScreen() {
             TextField(
                 modifier = Modifier.fillMaxWidth(),
                 label = {
-                    Text(stringResource(Res.string.description),)
+                    Text(stringResource(Res.string.description))
                 },
                 value = description,
                 onValueChange = {
@@ -105,7 +123,8 @@ fun AddGoalScreen() {
         }
 
         Button(
-            modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter).padding(PaddingValues(0.dp,0.dp,0.dp,16.dp)),
+            modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter)
+                .padding(PaddingValues(0.dp, 0.dp, 0.dp, 16.dp)),
             onClick = {},
         ) {
             Text(stringResource(Res.string.save_goal))
@@ -118,7 +137,7 @@ fun AddGoalScreen() {
 enum class GoalIcons(
     val icon: ImageVector
 ) {
-//    WATER(Icons.Default.LocalDrink),
+    //    WATER(Icons.Default.LocalDrink),
 //    SUN(Icons.Default.LightMode),
 //    FITNESS(Icons.Default.FitnessCenter),
 //    SLEEP(Icons.Default.Bedtime),

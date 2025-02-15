@@ -49,6 +49,13 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
             implementation(libs.ktor.client.core)
+
+            // Multiplatform
+
+            // Navigator
+            implementation(libs.voyager.navigator)
+            // Transitions
+            implementation(libs.voyager.transitions)
         }
 
         iosMain.dependencies {

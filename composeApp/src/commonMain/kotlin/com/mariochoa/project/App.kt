@@ -1,7 +1,10 @@
 package com.mariochoa.project
 
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import cafe.adriel.voyager.navigator.Navigator
 import com.mariochoa.presentation.goal.AddGoalScreen
+import com.mariochoa.presentation.home.HomeScreen
 import com.mariochoa.theme.AppTheme
 import com.mariochoa.views.AddHabitView
 import com.mariochoa.views.HomeView
@@ -12,7 +15,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App() {
     AppTheme {
 //        AddHabitView()
-        AddGoalScreen()
+//        AddGoalScreen()
+        Navigator(AddGoalScreen())
+
 //        Surface(
 //            Modifier.fillMaxSize(),
 //            color = MaterialTheme.colorScheme.background
