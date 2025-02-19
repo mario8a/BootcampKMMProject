@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 //import androidx.compose.material.icons.filled.Bedtime
@@ -49,9 +50,7 @@ fun Home(viewModel: GoalViewModel) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-
-
-        val homeState by viewModel.uiState.collectAsState()
+        val homeState by viewModel.onState.collectAsState()
 
         Column(
             verticalArrangement = Arrangement.spacedBy(18.dp)
@@ -78,23 +77,17 @@ fun Home(viewModel: GoalViewModel) {
                     style = MaterialTheme.typography.titleMedium
                 )
             }
-
-            LazyColumn {
-                items(3) {
-                    Goal(
-                        Icons.Default.Star,
-                        "Drink watter",
-                        "Beber agua es bueno para la salud"
-                    )
+            if (homeState.goals.isNotEmpty()) {
+                LazyColumn {
+                    items(homeState.goals) { goal ->
+                        Goal(
+                            Icons.Default.Star,
+                            goal.title,
+                            goal.description
+                        )
+                    }
                 }
-//                Goal(
-////                    Icons.Filled.LightMode,
-//                    Icons.Default.Star,
-//                    "Despertar temprano",
-//                    "Beber agua es bueno para la salud"
-//                )
             }
-
         }
 
         val navigator = LocalNavigator.current

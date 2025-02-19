@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.update
 class GoalViewModel: AbstractViewModel() {
 
     private val _uiState = MutableStateFlow(UIState())
-    val uiState: StateFlow<UIState> = _uiState.asStateFlow()
+    val onState: StateFlow<UIState> = _uiState.asStateFlow()
 
     fun onEvent(intent: UIEvent) {
         when (intent) {
@@ -24,11 +24,6 @@ class GoalViewModel: AbstractViewModel() {
             }
         }
     }
-
-    fun onState() {
-
-    }
-
 }
 
 data class UIState(

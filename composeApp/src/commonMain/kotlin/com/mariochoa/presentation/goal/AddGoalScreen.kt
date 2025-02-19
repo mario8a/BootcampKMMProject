@@ -13,7 +13,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.Bedtime
+import androidx.compose.material.icons.filled.FitnessCenter
+import androidx.compose.material.icons.filled.ImportContacts
+import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material.icons.filled.LocalDrink
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -35,19 +39,16 @@ import bootcampkmmproject.composeapp.generated.resources.pick_icon
 import bootcampkmmproject.composeapp.generated.resources.save_goal
 import bootcampkmmproject.composeapp.generated.resources.title
 import bootcampkmmproject.composeapp.generated.resources.week_days
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.mariochoa.domain.goal.Goal
 import com.mariochoa.presentation.AppScreen
 import com.mariochoa.presentation.composables.core.ChipGroup
 import com.mariochoa.presentation.composables.core.ChipGroupMultiselect
-import com.mariochoa.presentation.composables.goal.Goal
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
 class AddGoalScreen(private val viewModel: GoalViewModel) : AppScreen() {
-    //    @Composable
-//    override fun Content() {
-//        AddGoal()
-//    }
     override val topBarTitle: (@Composable () -> Unit)?
         get() = {
             Text(
@@ -63,16 +64,13 @@ class AddGoalScreen(private val viewModel: GoalViewModel) : AppScreen() {
 @Composable
 fun AddGoal(viewModel: GoalViewModel) {
     Box(modifier = Modifier.fillMaxSize()) {
+        var title by rememberSaveable { mutableStateOf("") }
+        var description by rememberSaveable { mutableStateOf("") }
+
         Column(
             modifier = Modifier.fillMaxSize().padding(vertical = 60.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-//            Text(
-//                stringResource(Res.string.new_goal),
-//                style = MaterialTheme.typography.displaySmall
-//            )
-
-            var title by rememberSaveable { mutableStateOf("") }
             TextField(
                 modifier = Modifier.fillMaxWidth(),
                 label = {
@@ -86,7 +84,7 @@ fun AddGoal(viewModel: GoalViewModel) {
                 maxLines = 1
             )
 
-            var description by rememberSaveable { mutableStateOf("") }
+
             TextField(
                 modifier = Modifier.fillMaxWidth(),
                 label = {
@@ -98,9 +96,6 @@ fun AddGoal(viewModel: GoalViewModel) {
                 },
                 maxLines = 2
             )
-
-
-
 
             ChipGroup(
                 title = stringResource(Res.string.pick_icon),
@@ -124,12 +119,16 @@ fun AddGoal(viewModel: GoalViewModel) {
 
         }
 
+        val navigator = LocalNavigator.currentOrThrow
+
         Button(
             modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter)
                 .padding(PaddingValues(0.dp, 0.dp, 0.dp, 16.dp)),
             onClick = {
                 // Guardar en el viewModel
                 // viewModel.onEvent(UIEvent.SaveGoal(goal = Goal(1, title, description)))
+                viewModel.onEvent(UIEvent.SaveGoal(goal = Goal(1, title, description)))
+                navigator.pop()
             },
         ) {
             Text(stringResource(Res.string.save_goal))
@@ -142,14 +141,9 @@ fun AddGoal(viewModel: GoalViewModel) {
 enum class GoalIcons(
     val icon: ImageVector
 ) {
-    //    WATER(Icons.Default.LocalDrink),
-//    SUN(Icons.Default.LightMode),
-//    FITNESS(Icons.Default.FitnessCenter),
-//    SLEEP(Icons.Default.Bedtime),
-//    BOOK(Icons.Default.ImportContacts),
-    WATER(Icons.Default.ShoppingCart),
-    SUN(Icons.Default.ShoppingCart),
-    FITNESS(Icons.Default.ShoppingCart),
-    SLEEP(Icons.Default.ShoppingCart),
-    BOOK(Icons.Default.ShoppingCart),
+    WATER(Icons.Default.LocalDrink),
+    SUN(Icons.Default.LightMode),
+    FITNESS(Icons.Default.FitnessCenter),
+    SLEEP(Icons.Default.Bedtime),
+    BOOK(Icons.Default.ImportContacts),
 }

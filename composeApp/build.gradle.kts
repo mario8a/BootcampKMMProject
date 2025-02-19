@@ -50,6 +50,9 @@ kotlin {
             implementation(libs.coil.network.ktor)
             implementation(libs.ktor.client.core)
 
+            // Icons
+            implementation(compose.materialIconsExtended)
+
             // Multiplatform
 
             // Navigator
